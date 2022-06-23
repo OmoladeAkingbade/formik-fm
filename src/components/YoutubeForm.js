@@ -7,9 +7,28 @@ const YoutubeForm = () => {
       email: '',
       channel: '',
     },
-    onSubmit: values => {
-      console.log('Form Data', values)
-    }
+    onSubmit: (values) => {
+      console.log('Form Data', values);
+    },
+    validate: (values) => {
+      //values.name values.email values.channel
+      // errors.name errors.email errors.channel
+      //errors.name = ' This field is required '
+
+      let errors = {};
+      if (!values.name) {
+        errors.name = 'Required';
+      }
+      if (!values.email) {
+        errors.email = 'Required';
+      }else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address';
+      }
+   
+      if (!values.email) {
+        errors.channel = 'Required';
+      }
+    },
   });
 
   // console.log('Form values', formik.values);
@@ -43,7 +62,7 @@ const YoutubeForm = () => {
           value={formik.values.channel}
         />
 
-        <button type='submit'> submit </button>
+        <button type="submit"> submit </button>
       </form>
     </div>
   );
